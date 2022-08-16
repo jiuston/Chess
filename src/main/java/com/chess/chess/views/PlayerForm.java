@@ -1,6 +1,7 @@
 package com.chess.chess.views;
 
 import com.chess.chess.modelo.player.Player;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.Key;
@@ -9,10 +10,12 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
+import com.vaadin.flow.component.textfield.GeneratedVaadinEmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.shared.Registration;
 import lombok.Getter;
 
@@ -28,15 +31,27 @@ public class PlayerForm extends FormLayout {
   Button close = new Button("Cancel");
 
   public PlayerForm() {
+    player =new Player();
     binder.bindInstanceFields(this);
     nickname.setPlaceholder("Add a nickName");
     email.setPlaceholder("Add the email");
     addClassName("player-form");
+    setValueChanges(nickname);
+    email.setValueChangeMode(ValueChangeMode.ON_CHANGE);
+    email.addValueChangeListener(e ->save.setEnabled(binder.isValid()));
     add(email);
     add(nickname, createButtonsLayout());
   }
 
+  private void setValueChanges(TextField... textFields){
+    for (TextField t: textFields) {
+      t.setValueChangeMode(ValueChangeMode.EAGER);
+      t.addValueChangeListener(e ->save.setEnabled(binder.isValid()));
+    }
+  }
+
   private HorizontalLayout createButtonsLayout() {
+    save.setEnabled(false);
     save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
     delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
     close.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
@@ -45,7 +60,6 @@ public class PlayerForm extends FormLayout {
     save.addClickListener(event -> validateAndSave());
     delete.addClickListener(event -> fireEvent(new DeleteEvent(this, player)));
     close.addClickListener(event -> fireEvent(new CloseEvent(this)));
-    binder.addStatusChangeListener(e -> save.setEnabled(binder.isValid()));
     return new HorizontalLayout(save, delete, close);
   }
 

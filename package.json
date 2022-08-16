@@ -362,6 +362,8 @@
     "@polymer/polymer": "$@polymer/polymer",
     "chokidar": "$chokidar",
     "date-fns": "$date-fns",
-    "core-js": "$core-js"
+    "core-js": "$core-js",
+    "line-awesome": "$line-awesome",
+    "lumo-css-framework": "$lumo-css-framework"
   }
 }

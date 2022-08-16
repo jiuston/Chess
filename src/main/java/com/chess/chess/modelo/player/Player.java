@@ -9,6 +9,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,10 +33,12 @@ public class Player {
     @Column(name = "id_player")
     private String idPlayer;
 
+    @NotEmpty
     @Column(name = "nickname", nullable = false, unique = true)
     private String nickname;
 
     @Email
+    @NotEmpty
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
