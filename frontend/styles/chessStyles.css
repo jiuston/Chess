@@ -1,11 +1,11 @@
-    #contenedor {
+    .contenedor {
         position: relative;
         text-align: center;
         width: 800px;
         height: 800px;
         border: 1px solid #333333;
         background-color: #FFF8F0;
-        margin: 60px auto;
+        margin: -10px auto;
     }
 
     .cuadro {
@@ -13,7 +13,7 @@
         width: 100px;
         height: 100px;
         float: left;
-        font-size: 5px;
+
     }
 
     .a1 {
@@ -32,10 +32,18 @@
         color: #222;
         font-size: 75px;
         text-shadow: 1px 1px 1px rgba(255, 255, 255, .6);
+        height: 100px;
+        position: absolute;
+        left: 13px;
+        bottom: 13px;
     }
 
     .piezaBlanca {
         color: rgb(223, 193, 156);
         font-size: 75px;
         text-shadow: 1px 1px 1px rgba(255, 255, 255, .6);
+        height: 100px;
+        position: absolute;
+        left: 13px;
+        bottom: 13px;
     }

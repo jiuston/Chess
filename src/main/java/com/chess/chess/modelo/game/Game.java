@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.awt.*;
+import java.util.HashMap;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -51,5 +52,8 @@ public class Game {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "color_ganador")
     private Color colorGanador;
+
+    @Column(name = "movimientos")
+    private HashMap<Integer,String> movimientos;
 
 }

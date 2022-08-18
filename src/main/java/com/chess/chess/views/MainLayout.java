@@ -1,5 +1,6 @@
 package com.chess.chess.views;
 
+import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.html.H1;
@@ -23,7 +24,7 @@ public class MainLayout extends AppLayout {
     HorizontalLayout header = new HorizontalLayout(new DrawerToggle(), logo);
 
     header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-
+    header.setHeight(75, Unit.PIXELS);
     header.setWidth("100%");
     header.addClassNames("py-0", "px-m");
 
