@@ -1,0 +1,41 @@
+    #contenedor {
+        position: relative;
+        text-align: center;
+        width: 800px;
+        height: 800px;
+        border: 1px solid #333333;
+        background-color: #FFF8F0;
+        margin: 60px auto;
+    }
+
+    .cuadro {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        float: left;
+        font-size: 5px;
+    }
+
+    .a1 {
+        background-color: rgb(241, 241, 241);
+    }
+
+    .a2 {
+        background-color: black;
+    }
+
+    .corte {
+        clear: both;
+    }
+
+    .piezaNegra {
+        color: #222;
+        font-size: 75px;
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, .6);
+    }
+
+    .piezaBlanca {
+        color: rgb(223, 193, 156);
+        font-size: 75px;
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, .6);
+    }

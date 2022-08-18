@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.awt.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -46,5 +47,9 @@ public class Game {
     @Column(name = "estado", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Estado estado;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "color_ganador")
+    private Color colorGanador;
 
 }

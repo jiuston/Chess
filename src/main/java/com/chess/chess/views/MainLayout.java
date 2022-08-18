@@ -32,9 +32,14 @@ public class MainLayout extends AppLayout {
 
   private void createDrawer() {
     RouterLink listLink = new RouterLink("See players", ListView.class);
+    RouterLink chessLink = new RouterLink("See chess", ChessView.class);
+    setHighlightCondition(listLink,chessLink);
+    addToDrawer(new VerticalLayout(listLink, chessLink));
+  }
 
-    listLink.setHighlightCondition(HighlightConditions.sameLocation());
-
-    addToDrawer(new VerticalLayout(listLink));
+  private void setHighlightCondition(RouterLink... routerLinks){
+    for (RouterLink r : routerLinks) {
+        r.setHighlightCondition(HighlightConditions.sameLocation());
+    }
   }
 }
