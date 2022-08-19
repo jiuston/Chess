@@ -1,5 +1,6 @@
 package com.chess.chess.views;
 
+import com.chess.chess.views.chess.ChessView;
 import com.vaadin.flow.component.Unit;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;

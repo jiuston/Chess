@@ -28,22 +28,31 @@
         clear: both;
     }
 
-    .piezaNegra {
-        color: #222;
+    .pieza {
+        font-family: fantasy;
         font-size: 75px;
-        text-shadow: 1px 1px 1px rgba(255, 255, 255, .6);
-        height: 100px;
+        height: 75px;
         position: absolute;
         left: 13px;
-        bottom: 13px;
+        bottom: 35px;
+        margin-top: 10px;
+    }
+
+    .pieza:hover{
+        cursor: pointer;
+    }
+
+    .v-dragged.pieza {
+        font-weight: bold;
+        opacity: 0.5;
+    }
+
+    .piezaNegra {
+        color: #222;
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, .6);
     }
 
     .piezaBlanca {
         color: rgb(223, 193, 156);
-        font-size: 75px;
-        text-shadow: 1px 1px 1px rgba(255, 255, 255, .6);
-        height: 100px;
-        position: absolute;
-        left: 13px;
-        bottom: 13px;
+        text-shadow: 1px 1px 1px rgb(255, 255, 255);
     }
