@@ -12,31 +12,33 @@ public class TableroDiv extends Div {
 
     private void generarCuadrosPiezas(Div divTablero) {
         boolean flag = true;
-        for (int x = 0; x < 4; x++) {
-            for (int i = 0; i < 8; i++) {
-                Div divCuadroBlanco = new Div();
-                divCuadroBlanco.addClassNames("cuadro", "cuadroBlanco");
-                Div divCuadroNegro = new Div();
-                divCuadroNegro.addClassNames("cuadro", "cuadroNegro");
+        int posY = 8;
+        for (int x = 0; x < 4; x++, posY--) {
+            int j = 65;
+            for (int i = 0; i < 8; i++, j++) {
                 if (flag) {
+                    Div divCuadroBlanco = new Div();
+                    divCuadroBlanco.addClassNames("cuadro", "cuadroBlanco", Character.toString(j) + posY);
                     divTablero.add(divCuadroBlanco);
                     addPieces(i, divCuadroBlanco, x);
                 } else {
+                    Div divCuadroNegro = new Div();
+                    divCuadroNegro.addClassNames("cuadro", "cuadroNegro", Character.toString(j) + posY);
                     divTablero.add(divCuadroNegro);
                     addPieces(i, divCuadroNegro, x);
                 }
-
                 flag = !flag;
             }
+            posY--;
             for (int i = 8; i < 16; i++) {
-                Div divCuadroBlanco = new Div();
-                divCuadroBlanco.addClassNames("cuadro", "cuadroBlanco");
-                Div divCuadroNegro = new Div();
-                divCuadroNegro.addClassNames("cuadro", "cuadroNegro");
                 if (flag) {
+                    Div divCuadroNegro = new Div();
+                    divCuadroNegro.addClassNames("cuadro", "cuadroNegro", Character.toString(j) + posY);
                     divTablero.add(divCuadroNegro);
                     addPieces(i, divCuadroNegro, x);
                 } else {
+                    Div divCuadroBlanco = new Div();
+                    divCuadroBlanco.addClassNames("cuadro", "cuadroBlanco", Character.toString(j) + posY);
                     divTablero.add(divCuadroBlanco);
                     addPieces(i, divCuadroBlanco, x);
                 }
