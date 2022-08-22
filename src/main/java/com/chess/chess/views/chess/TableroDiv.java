@@ -11,10 +11,16 @@ public class TableroDiv extends Div {
     }
 
     private void generarCuadrosPiezas(Div divTablero) {
+        //flag determina cuando va un cuadrado negro y cuando uno blanco
         boolean flag = true;
+
+        //posY es laposición en numero del tablero
         int posY = 8;
+
         for (int x = 0; x < 4; x++, posY--) {
+            //J es la letra del tablero en código ASCII
             int j = 65;
+
             for (int i = 0; i < 8; i++, j++) {
                 if (flag) {
                     Div divCuadroBlanco = new Div();
