@@ -15,9 +15,9 @@ public class TableroDiv extends Div {
         for (int x = 0; x < 4; x++) {
             for (int i = 0; i < 8; i++) {
                 Div divCuadroBlanco = new Div();
-                divCuadroBlanco.addClassNames("cuadro", "a1");
+                divCuadroBlanco.addClassNames("cuadro", "cuadroBlanco");
                 Div divCuadroNegro = new Div();
-                divCuadroNegro.addClassNames("cuadro", "a2");
+                divCuadroNegro.addClassNames("cuadro", "cuadroNegro");
                 if (flag) {
                     divTablero.add(divCuadroBlanco);
                     addPieces(i, divCuadroBlanco, x);
@@ -30,9 +30,9 @@ public class TableroDiv extends Div {
             }
             for (int i = 8; i < 16; i++) {
                 Div divCuadroBlanco = new Div();
-                divCuadroBlanco.addClassNames("cuadro", "a1");
+                divCuadroBlanco.addClassNames("cuadro", "cuadroBlanco");
                 Div divCuadroNegro = new Div();
-                divCuadroNegro.addClassNames("cuadro", "a2");
+                divCuadroNegro.addClassNames("cuadro", "cuadroNegro");
                 if (flag) {
                     divTablero.add(divCuadroNegro);
                     addPieces(i, divCuadroNegro, x);
