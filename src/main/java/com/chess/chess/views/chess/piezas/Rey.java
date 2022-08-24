@@ -1,12 +1,15 @@
 package com.chess.chess.views.chess.piezas;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class Rey extends Pieza{
 
-    public Rey(String color, String posInicio){
+    public Rey(String color){
+        this.setNombre(getClass().getSimpleName());
         this.setColor(color);
-        this.setPosicion(posInicio);
     }
 
     @Override

@@ -7,11 +7,10 @@ import java.util.List;
 @Data
 public class Alfil extends Pieza{
 
-    public Alfil(String color, String posInicio){
+    public Alfil(String color) {
+        this.setNombre(getClass().getSimpleName());
         this.setColor(color);
-        this.setPosicion(posInicio);
     }
-
     @Override
     public boolean canMoveToThatPosition(String currentPos, String destPos) {
         return false;

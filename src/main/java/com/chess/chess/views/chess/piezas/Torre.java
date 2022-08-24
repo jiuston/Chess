@@ -1,15 +1,16 @@
 package com.chess.chess.views.chess.piezas;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.List;
 
 @Data
 public class Torre extends Pieza{
 
-    public Torre(String color, String posInicio){
+    public Torre(String color) {
+        this.setNombre(getClass().getSimpleName());
         this.setColor(color);
-        this.setPosicion(posInicio);
     }
 
     @Override

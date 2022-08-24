@@ -7,9 +7,9 @@ import java.util.List;
 @Data
 public class Peon extends Pieza{
 
-    public Peon(String color, String posInicio){
+    public Peon(String color) {
+        this.setNombre(getClass().getSimpleName());
         this.setColor(color);
-        this.setPosicion(posInicio);
     }
 
     @Override

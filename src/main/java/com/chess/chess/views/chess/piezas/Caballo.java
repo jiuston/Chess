@@ -7,9 +7,9 @@ import java.util.List;
 @Data
 public class Caballo extends Pieza{
 
-    public Caballo(String color, String posInicio){
+    public Caballo(String color) {
+        this.setNombre(getClass().getSimpleName());
         this.setColor(color);
-        this.setPosicion(posInicio);
     }
 
     @Override
