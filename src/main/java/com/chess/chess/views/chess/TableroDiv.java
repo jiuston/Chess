@@ -38,7 +38,8 @@ public class TableroDiv extends Div {
                 flag = !flag;
             }
             posY--;
-            for (int i = 8; i < 16; i++) {
+            j = 65;
+            for (int i = 8; i < 16; i++, j++) {
                 if (flag) {
                     Div divCuadroNegro = new Div();
                     divCuadroNegro.addClassNames("cuadro", "cuadroNegro");
