@@ -22,45 +22,45 @@ public class PiezaDiv extends Div implements DragSource<PiezaDiv>, HasStyle {
 
     private void checkPiecePossibleMovements(Pieza pieza, TableroDiv tableroDiv) {
         String grabbedPiece = pieza.getNombre();
-        switch (grabbedPiece){
-            case "Peon" -> checkPossiblePeonMovements(pieza, tableroDiv);
-            case "Torre" -> checkPossibleTorreMovements(pieza, tableroDiv);
-            case "Alfil" -> checkPossibleAlfilMovements(pieza, tableroDiv);
-            case "Caballo" -> checkPossibleCaballoMovements(pieza, tableroDiv);
-            case "Reina" -> checkPossibleReinaMovements(pieza, tableroDiv);
-            case "Rey" -> checkPossibleReyMovements(pieza, tableroDiv);
-        }
-    }
-
-    private void checkPossiblePeonMovements(Pieza pieza, TableroDiv tableroDiv) {
-    }
-
-    private void checkPossibleReyMovements(Pieza pieza, TableroDiv tableroDiv) {
-    }
-
-    private void checkPossibleReinaMovements(Pieza pieza, TableroDiv tableroDiv) {
-    }
-
-    private void checkPossibleCaballoMovements(Pieza pieza, TableroDiv tableroDiv) {
-    }
-
-    private void checkPossibleAlfilMovements(Pieza pieza, TableroDiv tableroDiv) {
-    }
-
-    private void checkPossibleTorreMovements(Pieza pieza, TableroDiv tableroDiv) {
         String currentPos = pieza.getPosicion();
+        List<String> possibleMovements = new ArrayList<>();
+        switch (grabbedPiece){
+            case "Peon" -> checkPossiblePeonMovements(currentPos, tableroDiv, possibleMovements);
+            case "Torre" -> checkPossibleTorreMovements(currentPos, tableroDiv, possibleMovements);
+            case "Alfil" -> checkPossibleAlfilMovements(currentPos, tableroDiv, possibleMovements);
+            case "Caballo" -> checkPossibleCaballoMovements(currentPos, tableroDiv, possibleMovements);
+            case "Reina" -> checkPossibleReinaMovements(currentPos, tableroDiv, possibleMovements);
+            case "Rey" -> checkPossibleReyMovements(currentPos, tableroDiv, possibleMovements);
+        }
+        while (possibleMovements.contains(currentPos)) possibleMovements.remove(currentPos);
+        possibleMovements.forEach(System.out::println);
+    }
+
+    private void checkPossiblePeonMovements(String currentPos, TableroDiv tableroDiv, List<String> possibleMovements) {
+    }
+
+    private void checkPossibleReyMovements(String currentPos, TableroDiv tableroDiv, List<String> possibleMovements) {
+    }
+
+    private void checkPossibleReinaMovements(String currentPos, TableroDiv tableroDiv, List<String> possibleMovements) {
+    }
+
+    private void checkPossibleCaballoMovements(String currentPos, TableroDiv tableroDiv, List<String> possibleMovements) {
+    }
+
+    private void checkPossibleAlfilMovements(String currentPos, TableroDiv tableroDiv, List<String> possibleMovements) {
+    }
+
+    private void checkPossibleTorreMovements(String currentPos, TableroDiv tableroDiv, List<String> possibleMovements) {
+
         int posX = currentPos.charAt(0); //Letra, A B C D E F G H, eje X del tablero.
                                         //En ascii la A es 65 y la H es 72
         int posY = currentPos.charAt(1); //Numero, 1 2 3 4 5 6 7 8, eje Y del tablero.
                                         // En ascii el 1 es 49 y el 8 es 56
         //La torre solo se puede mover en horizontal y vertical.
         //Todas las posiciones que quiera sin saltar piezas
-        List<String> possibleMovements = new ArrayList<>();
-
         getPossibleHorizontalMovements(posX, posY, possibleMovements, tableroDiv);
         getPossibleVerticalMovements(posX, posY, possibleMovements, tableroDiv);
-        possibleMovements.remove(currentPos);
-        possibleMovements.forEach(System.out::println);
     }
 
     private void getPossibleVerticalMovements(int posX, int posY, List<String> possibleMovements, TableroDiv tableroDiv) {
@@ -69,20 +69,20 @@ public class PiezaDiv extends Div implements DragSource<PiezaDiv>, HasStyle {
             possibleMovements.add(Character.toString(i) + Character.toString(posY));
         }
         //Hacemos lo mismo hacia la izquierda
-        for(int i = posX; i > 65; i--) {
+        for(int i = posX; i > 64; i--) {
             possibleMovements.add(Character.toString(i) + Character.toString(posY));
         }
     }
 
     private void getPossibleHorizontalMovements(int posX, int posY, List<String> possibleMovements, TableroDiv tableroDiv) {
         //Calculamos los posibles movimientos en el eje Y hacia arriba
-        for(int i = ++posY; i < 57; i++) {
+        for(int i = posY; i < 57; i++) {
             //Comprobamos que no haya una pieza en ese cuadrado, si la hay, no puede recorrer más
             possibleMovements.add(Character.toString(posX) + Character.toString(i));
 
         }
         //Hacemos lo mismo hacia abajo
-        for(int i = --posY; i >49; i--) {
+        for(int i = posY; i >48; i--) {
             possibleMovements.add(Character.toString(posX) + Character.toString(i));
         }
     }
