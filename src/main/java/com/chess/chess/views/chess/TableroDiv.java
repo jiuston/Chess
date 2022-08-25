@@ -1,16 +1,26 @@
 package com.chess.chess.views.chess;
 
 import com.chess.chess.views.chess.piezas.PiezasHtml;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TableroDiv extends Div {
 
+    @Getter
+    private List<Div> cuadros;
+
     public TableroDiv() {
+        cuadros = new ArrayList<>();
         addClassName("tablero");
-        generarCuadrosPiezas(this);
+        generarCuadrosPiezas();
     }
 
-    private void generarCuadrosPiezas(Div divTablero) {
+    private void generarCuadrosPiezas() {
         //flag determina cuando va un cuadrado negro y cuando uno blanco
         boolean flag = true;
 
@@ -25,15 +35,11 @@ public class TableroDiv extends Div {
                 if (flag) {
                     Div divCuadroBlanco = new Div();
                     divCuadroBlanco.addClassNames("cuadro", "cuadroBlanco");
-                    divCuadroBlanco.setId(Character.toString(j) + posY);
-                    divTablero.add(divCuadroBlanco);
-                    addPieces(i, divCuadroBlanco, x);
+                    setIdAndPieces(posY, x, j, i, divCuadroBlanco);
                 } else {
                     Div divCuadroNegro = new Div();
                     divCuadroNegro.addClassNames("cuadro", "cuadroNegro");
-                    divCuadroNegro.setId(Character.toString(j) + posY);
-                    divTablero.add(divCuadroNegro);
-                    addPieces(i, divCuadroNegro, x);
+                    setIdAndPieces(posY, x, j, i, divCuadroNegro);
                 }
                 flag = !flag;
             }
@@ -43,19 +49,22 @@ public class TableroDiv extends Div {
                 if (flag) {
                     Div divCuadroNegro = new Div();
                     divCuadroNegro.addClassNames("cuadro", "cuadroNegro");
-                    divCuadroNegro.setId(Character.toString(j) + posY);
-                    divTablero.add(divCuadroNegro);
-                    addPieces(i, divCuadroNegro, x);
+                    setIdAndPieces(posY, x, j, i, divCuadroNegro);
                 } else {
                     Div divCuadroBlanco = new Div();
                     divCuadroBlanco.addClassNames("cuadro", "cuadroBlanco");
-                    divCuadroBlanco.setId(Character.toString(j) + posY);
-                    divTablero.add(divCuadroBlanco);
-                    addPieces(i, divCuadroBlanco, x);
+                    setIdAndPieces(posY, x, j, i, divCuadroBlanco);
                 }
                 flag = !flag;
             }
         }
+    }
+
+    private void setIdAndPieces(int posY, int x, int j, int i, Div cuadro) {
+        cuadro.setId(Character.toString(j) + posY);
+        add(cuadro);
+        cuadros.add(cuadro);
+        addPieces(i, cuadro, x);
     }
 
     private void addPieces(int i, Div divCuadro, int x) {
