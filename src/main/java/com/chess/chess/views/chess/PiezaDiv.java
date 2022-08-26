@@ -7,17 +7,17 @@ import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.dnd.DragSource;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.dom.ClassList;
+import lombok.Getter;
 import org.springframework.lang.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class PiezaDiv extends Div implements DragSource<PiezaDiv>, HasStyle {
 
-    private Pieza pieza;
+   @Getter
+   private Pieza pieza;
 
     public PiezaDiv(){
         setDraggable(true);
@@ -27,7 +27,7 @@ public class PiezaDiv extends Div implements DragSource<PiezaDiv>, HasStyle {
 
     private void checkPiecePossibleMovements(Pieza pieza, TableroDiv tableroDiv) {
         String currentPos = pieza.getPosicion();
-        List<Div> possibleMovements = new ArrayList<>();
+        Set<Div> possibleMovements = new HashSet<>();
         pieza.checkPossibleMovements(currentPos, tableroDiv.getCuadros(), possibleMovements);
         possibleMovements.removeIf(div -> div.getId().get().equals(currentPos));
         possibleMovements.forEach(div -> System.out.println(div.getId().get()));

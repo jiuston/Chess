@@ -56,3 +56,7 @@
         color: rgb(223, 193, 156);
         text-shadow: 1px 1px 1px rgb(255, 255, 255);
     }
+
+    .puedeComerse{
+        background-color: red !important;
+    }
