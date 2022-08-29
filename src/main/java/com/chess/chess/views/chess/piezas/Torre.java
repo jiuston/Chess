@@ -5,7 +5,6 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Data
 public class Torre extends Pieza{
@@ -34,7 +33,7 @@ public class Torre extends Pieza{
     }
 
     @Override
-    public void checkPossibleMovements(String currentPos, List<Div> cuadrosTablero, Set<Div> possibleMovements) {
+    public void checkPossibleMovements(String currentPos, List<Div> cuadrosTablero, List<Div> possibleMovements) {
         int posX = currentPos.charAt(0); //Letra, A B C D E F G H, eje X del tablero.
         //En ascii la A es 65 y la H es 72
         int posY = currentPos.charAt(1); //Numero, 1 2 3 4 5 6 7 8, eje Y del tablero.
@@ -46,7 +45,6 @@ public class Torre extends Pieza{
         //Coge todos los divs verticales y horizontales sin comprobar que tengan o no piezas
         getPossibleDivsToEnd(cuadrosTablero,posX, posY, cuadrosPosibles);
         // A partir de esos Divs anteriores, comprueba si es posible ir a ellos o no
-        cuadrosPosibles.forEach(div -> System.out.println(div.getId().get()));
         getPossibleMovements(cuadrosPosibles, possibleMovements, posX, posY);
     }
 

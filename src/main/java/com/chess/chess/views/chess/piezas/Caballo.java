@@ -4,7 +4,6 @@ import com.vaadin.flow.component.html.Div;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 public class Caballo extends Pieza{
@@ -24,10 +23,10 @@ public class Caballo extends Pieza{
 
     }
 
-
     @Override
-    public void checkPossibleMovements(String currentPos, List<Div> cuadros, Set<Div> possibleMovements) {
+    public void checkPossibleMovements(String currentPos, List<Div> cuadros, List<Div> possibleMovements) {
 
     }
+
 
 }

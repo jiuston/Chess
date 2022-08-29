@@ -1,12 +1,10 @@
 package com.chess.chess.views.chess;
 
 import com.chess.chess.views.chess.piezas.PiezasHtml;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import lombok.Getter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TableroDiv extends Div {

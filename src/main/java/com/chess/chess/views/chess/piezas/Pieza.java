@@ -1,16 +1,10 @@
 package com.chess.chess.views.chess.piezas;
 
 import com.chess.chess.views.chess.PiezaDiv;
-import com.chess.chess.views.chess.TableroDiv;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Div;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -30,7 +24,7 @@ public abstract class Pieza {
       List<Div> cuadrosTablero, int posX, int posY, List<Div> cuadrosPosibles);
 
   public abstract void checkPossibleMovements(
-      String currentPos, List<Div> cuadros, Set<Div> possibleMovements);
+      String currentPos, List<Div> cuadros, List<Div> possibleMovements);
 
   protected boolean canEatPiece(Pieza piezaToEat) {
     return !piezaToEat.getColor().equals(this.getColor());
@@ -46,11 +40,11 @@ public abstract class Pieza {
     return div.getChildren().findFirst().isPresent();
   }
 
-  protected Set<Div> getPossibleMovements(
-      List<Div> divsCuadrado, Set<Div> possibleMovements, int posX, int posY) {
+  protected void getPossibleMovements(
+      List<Div> divsCuadrado, List<Div> possibleMovements, int posX, int posY) {
     // Letra, A B C D E F G H, eje X del tablero.
     // En ascii la A es 65 y la H es 72
-    // Numero, 1 2 3 4 5 6 7 8, eje Y del tablero.
+    // Número, 1 2 3 4 5 6 7 8, eje Y del tablero.
     // En ascii el 1 es 49 y el 8 es 56
     for (int i = posX + 1; i < 73 && canMove; i++) {
       // Comprobamos las casillas hacia la derecha de la pieza
@@ -71,10 +65,9 @@ public abstract class Pieza {
       // Comprobamos las casillas hacia la abajo de la pieza
       getVerticalMovements(divsCuadrado, possibleMovements, posX, i);
     }
-    return possibleMovements;
   }
 
-  private void getVerticalMovements(List<Div> divsCuadrado, Set<Div> possibleMovements, int posX, int i){
+  private void getVerticalMovements(List<Div> divsCuadrado, List<Div> possibleMovements, int posX, int i){
     Div div =
             divsCuadrado.stream()
                     .filter(
@@ -90,7 +83,7 @@ public abstract class Pieza {
   }
 
   private void getHorizontalMovements(
-      List<Div> divsCuadrado, Set<Div> possibleMovements, int posY, int i) {
+      List<Div> divsCuadrado, List<Div> possibleMovements, int posY, int i) {
     Div div =
         divsCuadrado.stream()
             .filter(

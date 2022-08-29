@@ -1,18 +1,15 @@
 package com.chess.chess.views.chess;
 
 import com.chess.chess.views.chess.piezas.*;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.dnd.DragSource;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.dom.ClassList;
 import lombok.Getter;
-import org.springframework.lang.NonNull;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PiezaDiv extends Div implements DragSource<PiezaDiv>, HasStyle {
 
@@ -27,7 +24,7 @@ public class PiezaDiv extends Div implements DragSource<PiezaDiv>, HasStyle {
 
     private void checkPiecePossibleMovements(Pieza pieza, TableroDiv tableroDiv) {
         String currentPos = pieza.getPosicion();
-        Set<Div> possibleMovements = new HashSet<>();
+        List<Div> possibleMovements = new ArrayList<>();
         pieza.checkPossibleMovements(currentPos, tableroDiv.getCuadros(), possibleMovements);
         possibleMovements.removeIf(div -> div.getId().get().equals(currentPos));
         possibleMovements.forEach(div -> System.out.println(div.getId().get()));
