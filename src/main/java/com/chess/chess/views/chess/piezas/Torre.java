@@ -40,7 +40,6 @@ public class Torre extends Pieza{
         // En ascii el 1 es 49 y el 8 es 56
         //La torre solo se puede mover en horizontal y vertical.
         //Todas las posiciones que quiera sin saltar piezas
-        this.setCanMove(true);
         List<Div> cuadrosPosibles = new ArrayList<>();
         //Coge todos los divs verticales y horizontales sin comprobar que tengan o no piezas
         getPossibleDivsToEnd(cuadrosTablero,posX, posY, cuadrosPosibles);

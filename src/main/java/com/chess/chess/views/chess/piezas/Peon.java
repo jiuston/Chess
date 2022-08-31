@@ -45,12 +45,13 @@ public class Peon extends Pieza{
 
     @Override
     public void checkPossibleMovements(String currentPos, List<Div> cuadros, List<Div> possibleMovements) {
-        int posX = currentPos.charAt(0);
-        int posY = currentPos.charAt(1);
-        this.setCanMove(true);
-        List<Div> cuadrosPosibles = new ArrayList<>();
-        getPossibleDivsToEnd(cuadros,posX,posY,cuadrosPosibles);
-        getPossibleMovements(cuadrosPosibles,possibleMovements,posX,posY);
+        if (isCanMove()){
+            int posX = currentPos.charAt(0);
+            int posY = currentPos.charAt(1);
+            List<Div> cuadrosPosibles = new ArrayList<>();
+            getPossibleDivsToEnd(cuadros,posX,posY,cuadrosPosibles);
+            getPossibleMovements(cuadrosPosibles,possibleMovements,posX,posY);
+        }
     }
 
     @Override

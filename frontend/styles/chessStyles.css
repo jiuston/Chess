@@ -58,5 +58,9 @@
     }
 
     .puedeComerse{
-        background-color: red !important;
+        background-color: red !!important;
+    }
+
+    .puedeMoverse{
+        background-color: green !important;
     }

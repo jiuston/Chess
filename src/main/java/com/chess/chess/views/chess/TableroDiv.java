@@ -12,7 +12,15 @@ public class TableroDiv extends Div {
     @Getter
     private List<Div> cuadros;
 
+    @Getter
+    private List<PiezaDiv> piezasBlancas;
+
+    @Getter
+    private List<PiezaDiv> piezasNegras;
+
     public TableroDiv() {
+        piezasNegras = new ArrayList<>();
+        piezasBlancas = new ArrayList<>();
         cuadros = new ArrayList<>();
         addClassName("tablero");
         generarCuadrosPiezas();
@@ -78,6 +86,8 @@ public class TableroDiv extends Div {
                 case 4 -> piezaDiv.setText(PiezasHtml.REY);
                 default -> piezaDiv.setText(PiezasHtml.PEON);
             }
+            piezasNegras.add(piezaDiv);
+            piezaDiv.getPieza().setCanMove(false);
         } else if (x==3){ //Si X es 0 está pintando las dos primeras filas del tablero que corresponden a las piezas blancas
             piezaDiv.addClassNames("piezaBlanca");
             divCuadro.add(piezaDiv);
@@ -89,6 +99,18 @@ public class TableroDiv extends Div {
                 case 12 -> piezaDiv.setText(PiezasHtml.REY);
                 default -> piezaDiv.setText(PiezasHtml.PEON);
             }
+            piezasBlancas.add(piezaDiv);
+            piezaDiv.getPieza().setCanMove(true);
+        }
+    }
+
+    public void cambiarTurno(String color) {
+        if (color.equals("blanco")){
+            getPiezasNegras().forEach(piezaDiv -> piezaDiv.getPieza().setCanMove(true));
+            getPiezasBlancas().forEach(piezaDiv -> piezaDiv.getPieza().setCanMove(false));
+        }else{
+            getPiezasNegras().forEach(piezaDiv -> piezaDiv.getPieza().setCanMove(false));
+            getPiezasBlancas().forEach(piezaDiv -> piezaDiv.getPieza().setCanMove(true));
         }
     }
 }
