@@ -4,6 +4,7 @@ import com.chess.chess.views.chess.piezas.*;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.dnd.DragSource;
+import com.vaadin.flow.component.dnd.DropTarget;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.dom.ClassList;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PiezaDiv extends Div implements DragSource<PiezaDiv>, HasStyle {
+public class PiezaDiv extends Div implements DragSource<PiezaDiv>, DropTarget<PiezaDiv>, HasStyle {
 
    @Getter
    private Pieza pieza;
@@ -25,15 +26,19 @@ public class PiezaDiv extends Div implements DragSource<PiezaDiv>, HasStyle {
 
     public PiezaDiv(){
         possibleMovements = new ArrayList<>();
-        setDraggable(true);
         addClassName("pieza");
         addDragStartListener(piezaDivDragStartEvent -> checkPiecePossibleMovements((TableroDiv) getParent().get().getParent().get())); //El primer padre es el cuadrado, el segundo es el tablero
-        addDragEndListener(piezaDivDragEndEvent -> removeClassNames((TableroDiv) getParent().get().getParent().get()));
+        addDragEndListener(piezaDivDragEndEvent -> removeClassNamesAndDropListeners());
     }
 
-    private void removeClassNames(TableroDiv tableroDiv) {
-        tableroDiv.getCuadros().forEach(div -> div.removeClassNames("puedeComerse", "puedeMoverse"));
-        setPositionToPieza();
+    private void removeClassNamesAndDropListeners() {
+        possibleMovements.forEach(div ->{
+            div.removeClassNames("puedeComerse", "puedeMoverse");
+            DropTarget<Div> divDropTarget = DropTarget.configure(div);
+            divDropTarget.setActive(false);
+            divDropTarget.addDropListener(null);
+        });
+            setPositionToPieza();
     }
 
     private void setPositionToPieza() {
@@ -49,7 +54,12 @@ public class PiezaDiv extends Div implements DragSource<PiezaDiv>, HasStyle {
         possibleMovements = new ArrayList<>();
         pieza.checkPossibleMovements(currentPos, tableroDiv.getCuadros(), possibleMovements);
         possibleMovements.removeIf(div -> div.getId().get().equals(currentPos));
-        possibleMovements.forEach(div -> div.addClassName("puedeMoverse"));
+        possibleMovements.forEach(div ->{
+            div.addClassName("puedeMoverse");
+            DropTarget<Div> divDropTarget = DropTarget.configure(div);
+            divDropTarget.setActive(true);
+            divDropTarget.addDropListener(divDropEvent -> div.add(this));
+        });
     }
 
 

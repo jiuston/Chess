@@ -24,6 +24,17 @@ public class TableroDiv extends Div {
         cuadros = new ArrayList<>();
         addClassName("tablero");
         generarCuadrosPiezas();
+        darTurnoBlancas();
+    }
+
+    public void darTurnoBlancas() {
+        piezasBlancas.forEach(piezaDiv -> piezaDiv.setDraggable(true));
+        piezasNegras.forEach(piezaDiv -> piezaDiv.setDraggable(false));
+    }
+
+    public void darTurnoNegras() {
+        piezasBlancas.forEach(piezaDiv -> piezaDiv.setDraggable(false));
+        piezasNegras.forEach(piezaDiv -> piezaDiv.setDraggable(true));
     }
 
     private void generarCuadrosPiezas() {
