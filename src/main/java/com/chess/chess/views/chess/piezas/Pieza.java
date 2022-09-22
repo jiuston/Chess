@@ -46,6 +46,7 @@ public abstract class Pieza {
     // En ascii la A es 65 y la H es 72
     // Número, 1 2 3 4 5 6 7 8, eje Y del tablero.
     // En ascii el 1 es 49 y el 8 es 56
+    canMove=true;
     for (int i = posX + 1; i < 73 && canMove; i++) {
       // Comprobamos las casillas hacia la derecha de la pieza
       getHorizontalMovements(divsCuadrado, possibleMovements, posY, i);

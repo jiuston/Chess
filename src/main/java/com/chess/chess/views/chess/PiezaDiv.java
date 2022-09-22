@@ -15,37 +15,41 @@ import java.util.List;
 
 public class PiezaDiv extends Div implements DragSource<PiezaDiv>, DropTarget<PiezaDiv>, HasStyle {
 
-   @Getter
-   private Pieza pieza;
+    @Getter
+    private Pieza pieza;
 
-   @Getter @Setter
-   private String currentPos;
+    @Getter
+    @Setter
+    private String currentPos;
 
-   @Getter
-   private List<Div> possibleMovements;
+    @Getter
+    private List<Div> possibleMovements;
 
-    public PiezaDiv(){
+    public PiezaDiv() {
         possibleMovements = new ArrayList<>();
         addClassName("pieza");
         addDragStartListener(piezaDivDragStartEvent -> checkPiecePossibleMovements((TableroDiv) getParent().get().getParent().get())); //El primer padre es el cuadrado, el segundo es el tablero
-        addDragEndListener(piezaDivDragEndEvent -> removeClassNamesAndDropListeners());
+        addDragEndListener(piezaDivDragEndEvent -> removeClassNamesAndDropListeners((Div) getParent().get()));
     }
 
-    private void removeClassNamesAndDropListeners() {
-        possibleMovements.forEach(div ->{
+    private void removeClassNamesAndDropListeners(Div divCuadro) {
+        possibleMovements.forEach(div -> {
             div.removeClassNames("puedeComerse", "puedeMoverse");
-            DropTarget<Div> divDropTarget = DropTarget.configure(div);
-            divDropTarget.setActive(false);
-            divDropTarget.addDropListener(null);
+            DropTarget.configure(div, false);
         });
+        if (!currentPos.equals(divCuadro.getId().get())) {
             setPositionToPieza();
+            ((TableroDiv) divCuadro.getParent().get()).cambiarTurno(this.getPieza().getColor());
+        }
     }
 
     private void setPositionToPieza() {
-        Div cuadroDiv =  this.getParent().isPresent() ? (Div)this.getParent().get() : null;
-        if (cuadroDiv!=null){
-            currentPos=cuadroDiv.getId().orElse(null);
-            this.pieza.setPosicion(currentPos);
+        Div cuadroDiv = this.getParent().isPresent() ? (Div) this.getParent().get() : null;
+        if (cuadroDiv != null) {
+            cuadroDiv.getId().ifPresent(pos -> {
+                setCurrentPos(pos);
+                this.pieza.setPosicion(pos);
+            });
         }
     }
 
@@ -54,20 +58,19 @@ public class PiezaDiv extends Div implements DragSource<PiezaDiv>, DropTarget<Pi
         possibleMovements = new ArrayList<>();
         pieza.checkPossibleMovements(currentPos, tableroDiv.getCuadros(), possibleMovements);
         possibleMovements.removeIf(div -> div.getId().get().equals(currentPos));
-        possibleMovements.forEach(div ->{
+        possibleMovements.forEach(div -> {
             div.addClassName("puedeMoverse");
-            DropTarget<Div> divDropTarget = DropTarget.configure(div);
-            divDropTarget.setActive(true);
-            divDropTarget.addDropListener(divDropEvent -> div.add(this));
+            DropTarget<Div> divDropTarget = DropTarget.configure(div, true);
+            divDropTarget.addDropListener(divDropEvent -> divDropEvent.getDragSourceComponent().ifPresent(div::add));
         });
     }
 
 
-    public void setText(PiezasHtml piezasHtml){
+    public void setText(PiezasHtml piezasHtml) {
         super.setText(new Html(piezasHtml.getPieza()).getInnerHtml());
         ClassList clases = this.getClassNames();
         String color = clases.contains("piezaNegra") ? "negro" : clases.contains("piezaBlanca") ? "blanco" : "";
-        switch (piezasHtml){
+        switch (piezasHtml) {
             case REY -> this.pieza = new Rey(color);
             case PEON -> this.pieza = new Peon(color);
             case ALFIL -> this.pieza = new Alfil(color);
@@ -77,7 +80,6 @@ public class PiezaDiv extends Div implements DragSource<PiezaDiv>, DropTarget<Pi
         }
         setPositionToPieza();
     }
-
 
 
 }

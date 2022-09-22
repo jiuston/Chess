@@ -28,13 +28,25 @@ public class TableroDiv extends Div {
     }
 
     public void darTurnoBlancas() {
-        piezasBlancas.forEach(piezaDiv -> piezaDiv.setDraggable(true));
-        piezasNegras.forEach(piezaDiv -> piezaDiv.setDraggable(false));
+        piezasBlancas.forEach(piezaDiv -> {
+            piezaDiv.setDraggable(true);
+            piezaDiv.getPieza().setCanMove(true);
+        });
+        piezasNegras.forEach(piezaDiv -> {
+            piezaDiv.setDraggable(false);
+            piezaDiv.getPieza().setCanMove(false);
+        });
     }
 
     public void darTurnoNegras() {
-        piezasBlancas.forEach(piezaDiv -> piezaDiv.setDraggable(false));
-        piezasNegras.forEach(piezaDiv -> piezaDiv.setDraggable(true));
+        piezasBlancas.forEach(piezaDiv -> {
+            piezaDiv.setDraggable(false);
+            piezaDiv.getPieza().setCanMove(false);
+        });
+        piezasNegras.forEach(piezaDiv -> {
+            piezaDiv.setDraggable(true);
+            piezaDiv.getPieza().setCanMove(true);
+        });
     }
 
     private void generarCuadrosPiezas() {
@@ -117,11 +129,9 @@ public class TableroDiv extends Div {
 
     public void cambiarTurno(String color) {
         if (color.equals("blanco")){
-            getPiezasNegras().forEach(piezaDiv -> piezaDiv.getPieza().setCanMove(true));
-            getPiezasBlancas().forEach(piezaDiv -> piezaDiv.getPieza().setCanMove(false));
+            darTurnoNegras();
         }else{
-            getPiezasNegras().forEach(piezaDiv -> piezaDiv.getPieza().setCanMove(false));
-            getPiezasBlancas().forEach(piezaDiv -> piezaDiv.getPieza().setCanMove(true));
+            darTurnoBlancas();
         }
     }
 }
